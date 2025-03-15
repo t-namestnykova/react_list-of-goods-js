@@ -51,7 +51,8 @@ export const App = () => {
   const [field, setField] = useState(SORT_FIELD.None);
   const [isReversed, setIsReversed] = useState(false);
   const visibleGoods = getPreparedGoods(goodsFromServer, field, isReversed);
-  const Reset = () => {
+
+  const resetSort = () => {
     setField(SORT_FIELD.None);
     setIsReversed(false);
   };
@@ -64,6 +65,7 @@ export const App = () => {
           type="button"
           className={classNames('button is-info', {
             'is-light': field !== SORT_FIELD.Alphabet,
+            'is-active': field === SORT_FIELD.Alphabet,
           })}
         >
           Sort alphabetically
@@ -74,6 +76,7 @@ export const App = () => {
           type="button"
           className={classNames('button is-success', {
             'is-light': field !== SORT_FIELD.Length,
+            'is-active': field === SORT_FIELD.Length,
           })}
         >
           Sort by length
@@ -84,6 +87,7 @@ export const App = () => {
           type="button"
           className={classNames('button is-warning', {
             'is-light': isReversed === false,
+            'is-active': isReversed,
           })}
         >
           Reverse
@@ -91,7 +95,7 @@ export const App = () => {
 
         {(field || isReversed) && (
           <button
-            onClick={Reset}
+            onClick={resetSort}
             type="button"
             className="button is-danger is-light"
           >
